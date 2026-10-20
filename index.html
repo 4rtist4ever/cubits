@@ -71,6 +71,16 @@ canvas{display:block}
 .mode .track{position:relative;width:54px;height:24px;background:#f4f1e6;box-shadow:0 -3px 0 #1e1d26,-3px 0 0 #1e1d26,3px 0 0 #1e1d26,0 3px 0 #1e1d26,inset 3px 3px 0 rgba(0,0,0,.12)}
 .mode .knob{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#f4cf3c;box-shadow:inset -3px -3px 0 rgba(0,0,0,.22),inset 3px 3px 0 rgba(255,255,255,.5);transition:left .18s steps(4)}
 :root[data-theme="dark"] .mode .knob{left:33px;background:#b38cf2}
+:root[data-theme="dark"] .mode .track{background:#2a2a31;box-shadow:0 -3px 0 #ecebe6,-3px 0 0 #ecebe6,3px 0 0 #ecebe6,0 3px 0 #ecebe6,inset 3px 3px 0 rgba(0,0,0,.3)}
+/* hint bubble left of the panel, pointing at "Classic figures", when a player seems stuck */
+.chint{position:fixed;width:230px;transform:translateY(-50%);background:#1e1d26;color:#fff8ec;font-family:'Silkscreen',monospace;font-size:10px;line-height:1.5;letter-spacing:.04em;padding:8px 10px 7px;z-index:60;pointer-events:none;box-shadow:0 -2px 0 #1e1d26,0 2px 0 #1e1d26,-2px 0 0 #1e1d26,2px 0 0 #1e1d26}
+.chint::after{content:'';position:absolute;right:-8px;top:calc(50% - 4px);width:6px;height:8px;background:inherit;clip-path:polygon(0 0,34% 0,34% 25%,67% 25%,67% 75%,34% 75%,34% 100%,0 100%)}
+:root[data-theme="dark"] .chint{background:#ecebe6;color:#1d1d21;box-shadow:0 -2px 0 #ecebe6,0 2px 0 #ecebe6,-2px 0 0 #ecebe6,2px 0 0 #ecebe6}
+.checks label.hint{position:relative}
+.checks label.hint::after{content:'Stuck? Turn this off for bold one-color figures – the sides are much easier to tell apart.';position:absolute;left:-4px;bottom:calc(100% + 14px);width:230px;white-space:normal;background:#1e1d26;color:#fff8ec;font-family:'Silkscreen',monospace;font-size:10px;line-height:1.5;letter-spacing:.04em;padding:8px 10px 7px;z-index:3;pointer-events:none;box-shadow:0 -2px 0 #1e1d26,0 2px 0 #1e1d26,-2px 0 0 #1e1d26,2px 0 0 #1e1d26}
+.checks label.hint::before{content:'';position:absolute;left:8px;bottom:calc(100% + 6px);width:8px;height:4px;background:#1e1d26;clip-path:polygon(0 0,100% 0,100% 50%,75% 50%,75% 100%,25% 100%,25% 50%,0 50%);z-index:3}
+:root[data-theme="dark"] .checks label.hint::after{background:#ecebe6;color:#1d1d21;box-shadow:0 -2px 0 #ecebe6,0 2px 0 #ecebe6,-2px 0 0 #ecebe6,2px 0 0 #ecebe6}
+:root[data-theme="dark"] .checks label.hint::before{background:#ecebe6}
 .mode:focus-visible{outline:2px dashed var(--ink);outline-offset:4px}
 .badge{position:absolute;right:48px;top:40px;border:1px solid var(--line);padding:7px 12px;font-size:12px;letter-spacing:.14em;color:var(--ink-2);display:flex;gap:9px;align-items:center}
 .badge i{width:7px;height:7px;background:var(--live);display:block;animation:blink 1.6s steps(1) infinite}
@@ -138,13 +148,13 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
 .settings[open] summary .chev{transform:rotate(180deg)}
 .settings .sbody{padding-top:14px}
 .settings .checks{margin-top:26px}
-.checks{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 10px;font-size:19px}
-.checks label{display:flex;gap:11px;align-items:center;cursor:pointer;user-select:none}
+.checks{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:8px 14px;font-size:19px}
+.checks label{display:flex;gap:11px;align-items:center;cursor:pointer;user-select:none;white-space:nowrap}
 .checks input{appearance:none;-webkit-appearance:none;width:16px;height:16px;margin:3px 3px 6px;background:var(--knob);box-shadow:0 -3px 0 #1e1d26,-3px 0 0 #1e1d26,3px 0 0 #1e1d26,0 3px 0 #1e1d26,0 6px 0 #1e1d26,inset 3px 3px 0 rgba(255,255,255,.75),inset -3px -3px 0 rgba(0,0,0,.14);cursor:pointer;flex:none;transition:transform .05s steps(1)}
 .checks input:checked{background:var(--fill);transform:translateY(3px);box-shadow:0 -3px 0 #1e1d26,-3px 0 0 #1e1d26,3px 0 0 #1e1d26,0 3px 0 #1e1d26,inset 3px 3px 0 rgba(0,0,0,.18),inset -3px -3px 0 rgba(255,255,255,.3)}
 .checks input:active{transform:translateY(3px);box-shadow:0 -3px 0 #1e1d26,-3px 0 0 #1e1d26,3px 0 0 #1e1d26,0 3px 0 #1e1d26,inset 3px 3px 0 rgba(0,0,0,.18)}
 
-.foot{position:absolute;left:48px;bottom:36px;width:min(680px,calc(100vw - 420px))}
+.foot{position:fixed;left:48px;bottom:36px;width:min(680px,calc(100vw - 420px))}
 .help{font-size:22px;line-height:1.4;color:var(--ink)}
 .help b{font-family:'Silkscreen',monospace;font-weight:400;font-size:12px;letter-spacing:.12em;color:var(--ink-2);margin-right:6px}
 .stats{display:grid;grid-template-columns:auto 1fr auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -170,14 +180,18 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
 .egg{position:fixed;display:flex;gap:10px;align-items:flex-end;z-index:1;pointer-events:none}   /* above the panel, tucked behind the Shortcuts box */
 .inside{z-index:2}
 .egg[hidden]{display:none}
-.btn .crown{display:none;position:absolute;left:-8px;top:-10px;transform:rotate(-20deg);width:16px;height:11px;shape-rendering:crispEdges;color:#f4cf3c;filter:drop-shadow(0 -2px 0 #1e1d26) drop-shadow(2px 0 0 #1e1d26) drop-shadow(-2px 0 0 #1e1d26);pointer-events:none}
+.btn .crown{display:none;position:absolute;left:-12px;top:-10px;transform:rotate(-18deg);width:24px;height:16px;z-index:1;shape-rendering:crispEdges;color:#f4cf3c;filter:drop-shadow(0 -2px 0 #1e1d26) drop-shadow(2px 0 0 #1e1d26) drop-shadow(-2px 0 0 #1e1d26);pointer-events:none}
 .btn.free .crown{display:block}
 .btn.free{--face:#f4cf3c}
 .btn.free:hover:not(:disabled){--face:#ffdb52}
 :root[data-theme="dark"] .btn.free{--face:#b38cf2}
 :root[data-theme="dark"] .btn.free:hover:not(:disabled){--face:#c3a2f6}
 #rewind{position:relative}
-.btn.free.needgame:hover::after,.btn.free.needgame:focus-visible::after,.btn.free.tip::after{content:'Start a New game first';position:absolute;left:50%;bottom:calc(100% + 14px);transform:translateX(-50%);white-space:nowrap;background:#1e1d26;color:#fff8ec;font-size:11px;letter-spacing:.06em;padding:7px 9px 6px;pointer-events:none;z-index:2;box-shadow:0 -2px 0 #1e1d26,0 2px 0 #1e1d26,-2px 0 0 #1e1d26,2px 0 0 #1e1d26}
+.btn.free.crowning .crown{animation:crownDrop 1.3s cubic-bezier(.3,1.25,.55,1) .4s both}
+@keyframes crownDrop{0%{transform:translate(50px,-110px) rotate(-220deg) scale(2.4);opacity:0}30%{opacity:1}72%{transform:translate(0,3px) rotate(-12deg) scale(1)}86%{transform:translate(0,-5px) rotate(-22deg) scale(1)}100%{transform:rotate(-18deg)}}
+.btn.free.crowning{animation:solvePop .36s steps(3) 1.62s}
+@keyframes solvePop{50%{transform:translateY(-4px)}}
+.btn.free.needgame:hover::after,.btn.free.needgame:focus-visible::after,.btn.free.tip::after{content:'Start a New game first';position:absolute;right:0;bottom:calc(100% + 14px);white-space:nowrap;background:#1e1d26;color:#fff8ec;font-size:11px;letter-spacing:.06em;padding:7px 9px 6px;pointer-events:none;z-index:3;box-shadow:0 -2px 0 #1e1d26,0 2px 0 #1e1d26,-2px 0 0 #1e1d26,2px 0 0 #1e1d26}
 .btn.free.needgame:hover::before,.btn.free.needgame:focus-visible::before,.btn.free.tip::before{content:'';position:absolute;left:calc(50% - 4px);bottom:calc(100% + 6px);width:8px;height:4px;background:#1e1d26;box-shadow:2px 4px 0 -0px #1e1d26;clip-path:polygon(0 0,100% 0,100% 50%,75% 50%,75% 100%,25% 100%,25% 50%,0 50%);pointer-events:none;z-index:2}
 :root[data-theme="dark"] .btn.free.needgame:hover::after,:root[data-theme="dark"] .btn.free.needgame:focus-visible::after,:root[data-theme="dark"] .btn.free.tip::after{background:#ecebe6;color:#1d1d21;box-shadow:0 -2px 0 #ecebe6,0 2px 0 #ecebe6,-2px 0 0 #ecebe6,2px 0 0 #ecebe6}
 :root[data-theme="dark"] .btn.free.needgame:hover::before,:root[data-theme="dark"] .btn.free.needgame:focus-visible::before,:root[data-theme="dark"] .btn.free.tip::before{background:#ecebe6}
@@ -263,6 +277,34 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
   .plogo{width:130px;margin:4px auto 14px}
   .settings{display:none}
 }
+/* desktop: controls panel and Shortcuts box share one right-hand column, so they can never overlap */
+.side{display:contents}
+@media (min-width: 761px){
+  .mode{right:52px}   /* toggle's right edge lines up with the control column */
+  .ui > .side{position:absolute;right:56px;top:100px;bottom:44px;width:340px;display:flex;flex-direction:column;gap:20px;pointer-events:none}
+  .side > *{pointer-events:auto}
+  .side .panel{position:relative;right:auto;top:auto;bottom:auto;width:auto;padding:0;flex:0 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden}
+  /* always-visible pixel scrollbar when the controls don't fit */
+  .side .panel::-webkit-scrollbar{width:10px}
+  .side .panel::-webkit-scrollbar-track{background:var(--well);border-left:2px solid var(--ink)}
+  .side .panel::-webkit-scrollbar-thumb{background:var(--fill);border:2px solid var(--ink);border-right:0}
+  @supports (-moz-appearance:none){ .side .panel{scrollbar-width:thin;scrollbar-color:var(--fill) var(--well)} }
+  .side .inside{display:block;position:relative;right:auto;bottom:auto;width:auto;flex:none;margin-top:auto}
+}
+/* tablet / narrow desktop and short screens: same column, a bit slimmer and tighter */
+@media (min-width: 761px) and (max-width: 1100px), (min-width: 761px) and (max-height: 860px){
+  .ui > .side{right:24px;top:84px;bottom:24px;width:290px;gap:16px}
+  .mode{right:20px;top:24px}
+  .side .pbody{padding:18px 20px 20px}
+  .side .plogo{width:170px;margin:6px auto 30px}
+}
+/* phone landscape: slim column, no Shortcuts box */
+@media (max-height: 520px) and (min-width: 761px){
+  .ui > .side{top:10px;bottom:10px;right:12px;width:270px}
+  .mode{right:auto;top:auto}
+  .side .inside{display:none}
+  .side .plogo{width:130px;margin:4px auto 14px}
+}
 @media (prefers-reduced-motion: reduce){.caret,.badge i{animation:none}}
 </style>
 </head>
@@ -278,6 +320,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
   <button class="mode" id="modeToggle" aria-label="Dark mode" aria-pressed="false"><span id="modeLbl">Light</span><span class="track"><span class="knob"></span></span></button>
 
 
+  <div class="side">
   <aside class="panel" aria-label="Cube controls">
     <div class="pbody">
     <h1 class="plogo"><img class="lg-light" src="logo-light.png" alt="Cubits" width="640" height="271"><img class="lg-dark" src="logo-dark.png" alt="Cubits" width="640" height="271"></h1>
@@ -293,7 +336,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
         <div class="row3">
           <button class="btn" id="undo">Undo</button>
           <button class="btn" id="reset">Reset</button>
-          <button class="btn" id="rewind"><svg class="crown" viewBox="0 0 7 5" aria-hidden="true"><rect x="0" y="1" width="1" height="3" fill="currentColor"/><rect x="3" y="0" width="1" height="3" fill="currentColor"/><rect x="6" y="1" width="1" height="3" fill="currentColor"/><rect x="1" y="2" width="1" height="1" fill="currentColor"/><rect x="5" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="7" height="2" fill="currentColor"/></svg>Solve</button>
+          <button class="btn" id="rewind"><svg class="crown" viewBox="0 0 11 7" aria-hidden="true"><rect x="0" y="0" width="1" height="1" fill="#f4cf3c"/><rect x="5" y="0" width="1" height="1" fill="#fff3b0"/><rect x="10" y="0" width="1" height="1" fill="#f4cf3c"/><rect x="0" y="1" width="2" height="1" fill="#f4cf3c"/><rect x="4" y="1" width="3" height="1" fill="#f4cf3c"/><rect x="9" y="1" width="2" height="1" fill="#f4cf3c"/><rect x="0" y="2" width="3" height="1" fill="#f4cf3c"/><rect x="4" y="2" width="3" height="1" fill="#f4cf3c"/><rect x="8" y="2" width="3" height="1" fill="#f4cf3c"/><rect x="0" y="3" width="11" height="3" fill="#f4cf3c"/><rect x="1" y="3" width="2" height="1" fill="#fff3b0"/><rect x="2" y="4" width="1" height="1" fill="#e04e3a"/><rect x="5" y="4" width="1" height="1" fill="#4a72e8"/><rect x="8" y="4" width="1" height="1" fill="#e04e3a"/><rect x="0" y="6" width="11" height="1" fill="#c99a1f"/></svg>Solve</button>
         </div>
       </div>
     </div>
@@ -315,6 +358,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
           <label><input type="checkbox" id="sound" checked> Bleeps</label>
           <label><input type="checkbox" id="drift" checked> Idle drift</label>
           <label><input type="checkbox" id="classic"> Classic figures</label>
+          <label><input type="checkbox" id="plain"> Plain colors</label>
         </div>
       </div>
     </details>
@@ -339,6 +383,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:22px;border:0;border-radiu
       <p><kbd>Space</kbd> starts a new game, <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>Z</kbd> undoes your last twist.</p>
     </div>
   </details>
+  </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"><b id="toastHead">Solved!</b><span id="toastTxt"></span></div>
 
@@ -573,6 +618,7 @@ const NOTES = [392, 440, 523, 587, 659, 784];
 let active = null;          // current spring twist
 const queue = [];           // pending programmatic moves
 const history = [];         // {axis,layer,turns,scramble}
+let bestFaces = 0, lastImprove = 0, classicHintShown = false;
 let paused = false, userMoves = 0, scrambled = false, tStart = 0, tElapsed = 0, timing = false, pendingStart = false;
 let pulse = {x:0, v:0};     // scale pulse on settle
 
@@ -658,7 +704,12 @@ function afterMove(){
   $('#rewind').classList.toggle('needgame', r.solved);
   if (active || queue.length) return;
   setBusy(false);
+  if (scrambled && timing){   // watch for a stuck player: many moves without finishing another side
+    if (r.faces > bestFaces){ bestFaces = r.faces; lastImprove = userMoves; }
+    if (st.classic && !st.plain && !classicHintShown && userMoves >= 12 && userMoves - lastImprove >= 10) showClassicHint();
+  }
   if (pendingStart){
+    bestFaces = r.faces; lastImprove = 0;
     pendingStart = false; scrambled = true; userMoves = 0;
     timing = true; tStart = performance.now(); tElapsed = 0;
     showToast('Go!', 'The clock is running', 1300);
@@ -1185,8 +1236,25 @@ bindRange('speed','spV','speed'); bindRange('bounce','boV','bounce');
 ['sound','drift'].forEach(id => { const el = $('#'+id); el.onchange = () => st[id] = el.checked; });
 try { st.classic = localStorage.getItem('cube-classic') === '1'; } catch(_){}
 $('#classic').checked = st.classic;
+function showClassicHint(){
+  classicHintShown = true;
+  $('.settings').open = true;
+  const lab = $('#classic').closest('label'); if (!lab || !lab.offsetParent) return;   // settings hidden (e.g. on phones)
+  lab.scrollIntoView({block:'nearest'});
+  const box = $('#classic').getBoundingClientRect();
+  const tip = document.createElement('div'); tip.className = 'chint';
+  tip.textContent = 'Stuck? Turn off Classic figures for bold one-color figures – the sides are much easier to tell apart.';
+  tip.style.top = Math.round(box.top + box.height/2) + 'px'; tip.style.right = Math.round(innerWidth - box.left + 14) + 'px';
+  document.body.appendChild(tip);
+  bleep(784, .06, .035, 'triangle'); bleep(988, .08, .03, 'triangle', .08);
+  const close = () => tip.remove();
+  setTimeout(close, 10000); $('#classic').addEventListener('change', close, {once:true});
+}
 $('#classic').onchange = e => { st.classic = e.target.checked; paintFaces(); try { localStorage.setItem('cube-classic', st.classic ? '1' : '0'); } catch(_){} bleep(st.classic ? 660 : 440, .05); };
-if (st.classic) paintFaces();
+try { st.plain = localStorage.getItem('cube-plain') === '1'; } catch(_){}
+$('#plain').checked = st.plain;
+$('#plain').onchange = e => { st.plain = e.target.checked; paintFaces(); try { localStorage.setItem('cube-plain', st.plain ? '1' : '0'); } catch(_){} bleep(st.plain ? 440 : 660, .05); };
+if (st.classic || st.plain) paintFaces();
 if (reduceMotion){ st.drift = false; $('#drift').checked = false; }
 $('#reset').onclick = reset; $('#undo').onclick = undo; $('#rewind').onclick = solveCube;
 $('#wClose').onclick = hideWin;
@@ -1218,14 +1286,20 @@ $('.inside .trophy').addEventListener('click', e => {   // Alt/Option + click th
   try { localStorage.removeItem('cube-egg'); localStorage.removeItem('cube-shows'); } catch(_){}
   location.reload();
 });
-function applyFreePlay(){ eggStage = 3; eggKey.textContent = 'S'; eggKey.style.cursor = 'default'; const b = $('#rewind'); b.classList.add('free'); b.title = 'Free Play: Solve ends with a victory show'; $('.inside').classList.add('free'); }
+function crownIt(b){   // the crown drops onto the Solve button, bounces, and sparkles on landing
+  b.scrollIntoView({block:'nearest'}); b.classList.add('crowning');
+  [1047, 1319, 1568].forEach((f, i) => bleep(f, .05, .025, 'triangle', .4 + i*.12));
+  setTimeout(() => { trophySparks(12, b.querySelector('.crown')); bleep(523, .06, .045); bleep(784, .12, .04, 'square', .07); }, 1350);
+  setTimeout(() => b.classList.remove('crowning'), 2200);
+}
+function applyFreePlay(anim){ eggStage = 3; eggKey.textContent = 'S'; eggKey.style.cursor = 'default'; const b = $('#rewind'); b.classList.add('free'); b.title = 'Free Play: Solve ends with a victory show'; $('.inside').classList.add('free'); if (anim) crownIt(b); }
 if (eggUnlocked) applyFreePlay();
 EGG_SEQ.forEach(f => { const c = document.createElement('canvas'); c.width = c.height = 15; c.getContext('2d').drawImage(sprite(f), 0, 0); eggRow.appendChild(c); });
 // the grey trophy in the Shortcuts header: hover sprinkles pixel sparks, a click starts the figure riddle
 const trophy = $('.inside .trophy');
-function trophySparks(n){
+function trophySparks(n, el){
   if (reduceMotion) return;
-  const r = trophy.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+  const r = (el || trophy).getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
   const cols = eggUnlocked ? ['#f4cf3c', '#fff8ec'] : ['#9d9ca4', '#c9c8ce', '#f4cf3c'];
   for (let i = 0; i < n; i++){
     const s = document.createElement('i'); s.className = 'tspark'; s.style.left = (cx - 1) + 'px'; s.style.top = (cy - 1) + 'px';
@@ -1281,8 +1355,8 @@ function eggCheck(){
     eggStage = 3; eggUnlocked = true; try { localStorage.setItem('cube-egg', '1'); } catch(_){}
     eggRow.classList.add('done'); pulse.v -= 3;
     [523, 659, 784, 1047, 1319].forEach((f, i) => bleep(f, .09, .045, 'square', .25 + i*.09));
-    applyFreePlay();
-    setTimeout(() => showToast('FREE PLAY unlocked!', 'Solve now ends with the victory show of the picture facing you.', 7000), 250);
+    applyFreePlay(true);
+    setTimeout(() => showToast('FREE PLAY unlocked!', 'Hitting the Solve button now ends with the victory show of the picture facing you.', 7000), 250);
   }
 }
 $('#wAgain').onclick = () => { hideWin(); setTimeout(newGame, 250); };
@@ -1318,7 +1392,7 @@ function applyTheme(t){
   dotRGB = cssVar('--dot'); dotA = +cssVar('--dot-a');
 }
 let savedTheme = null; try { savedTheme = localStorage.getItem('cube-theme'); } catch(_){}
-applyTheme(savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+applyTheme(savedTheme || 'dark');   // dark is the default look
 $('#modeToggle').onclick = () => {
   const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
   applyTheme(t); try { localStorage.setItem('cube-theme', t); } catch(_){}
@@ -1359,7 +1433,7 @@ function resize(){
   renderer.setSize(innerWidth, innerHeight, false);
   camera.aspect = innerWidth/innerHeight;
   // keep the cube clear of the side panel on wide screens
-  const off = innerWidth > 1100 ? -innerWidth*0.155 : (innerHeight <= 520 && innerWidth > 760) ? -141 : 0;
+  const off = innerWidth > 1100 && innerHeight > 860 ? -innerWidth*0.155 : innerWidth > 760 ? (innerHeight <= 520 ? -141 : -157) : 0;   // centre the cube in the space left of the control column
   camera.setViewOffset(innerWidth, innerHeight, -off, innerWidth<760 ? innerHeight*0.065 : 0, innerWidth, innerHeight);
   camera.updateProjectionMatrix();
   const portrait = innerWidth/innerHeight < 1;
