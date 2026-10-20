@@ -51,4 +51,4 @@ No build step needed. Download the repo and open `index.html` in your browser.
 
 ## Credits
 
-Design & code by [@4rtist4ever](https://github.com/4rtist4ever). Built with a single HTML file and [three.js](https://threejs.org).
+Design & code by [@4rtist4ever](https://github.com/4rtist4ever) powered with AI. Built with a single HTML file and [three.js](https://threejs.org).
