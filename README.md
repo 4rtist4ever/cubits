@@ -5,8 +5,6 @@ An 8-bit Rubik's Cube for the browser: twist, solve and unlock victory shows.
 **▶ Play:** https://4rtist4ever.github.io/cubits/
 
 <img width="1548" height="1123" alt="image" src="https://github.com/user-attachments/assets/0c69e2f2-23ea-44cb-9ae8-bd7e9414490f" />
-<img width="1548" height="1117" alt="image" src="https://github.com/user-attachments/assets/bf4d4c56-946e-4e91-bb71-b12a5eecc278" />
-
 
 ## Controls
 
